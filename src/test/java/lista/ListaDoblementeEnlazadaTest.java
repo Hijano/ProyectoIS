@@ -426,9 +426,7 @@ public class ListaDoblementeEnlazadaTest {
 
 		lista.insertarFinal(new Nodo<Integer>(10,null,null));
 		sb.append(10).append(")");
-		assertEquals(sb.toString(),
-				(new ListaDoblementeEnlazada<Integer>()).toString()
-				);
+		assertEquals(sb.toString(),lista.toString());
 	}
 	
 	@SuppressWarnings("null")
