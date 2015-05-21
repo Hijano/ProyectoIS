@@ -222,8 +222,8 @@ public class ListaDoblementeEnlazadaTest {
 		lista.insertarPrincipio(nodoPrimero);
 		lista.insertarFinal(nodo);
 		assertEquals(lista.ultimo(),nodo.elemento);
-		assertTrue(nodoPrimero.anterior==nodo);
-		assertTrue(nodo.siguiente==nodoPrimero);
+		assertSame(nodoPrimero.anterior,nodo);
+		assertSame(nodo.siguiente,nodoPrimero);
 	}
 	@Test(expected= Exception.class)
 	public void siSeInsertaUnNodoNuloAlFinalDeUnaListaSeLanzaUnaExcepcion(){
