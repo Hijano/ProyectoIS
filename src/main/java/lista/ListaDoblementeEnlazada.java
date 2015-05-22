@@ -1,7 +1,7 @@
 package lista;
 
 public class ListaDoblementeEnlazada<T> {
-    private static class Nodo<E> {
+    public static class Nodo<E> {
         private E elemento;
         private Nodo<E> siguiente;
         private Nodo<E> anterior;
@@ -12,12 +12,14 @@ public class ListaDoblementeEnlazada<T> {
             anterior = prev;
         }
     }
-
+    
+    private int tamaño;
     private Nodo<T> primero, ultimo;
 
     public ListaDoblementeEnlazada() {
         primero = null;
         ultimo = null;
+        tamaño = 0;
     }
 
     public boolean estaVacio() {
@@ -33,7 +35,7 @@ public class ListaDoblementeEnlazada<T> {
         } else {
             nodo.siguiente.anterior = nuevoNodo;
         }
-
+        tamaño++;
         nodo.siguiente = nuevoNodo;
     }
 
@@ -46,7 +48,7 @@ public class ListaDoblementeEnlazada<T> {
         } else {
             nodo.anterior.siguiente = nuevoNodo;
         }
-
+        tamaño++;
         nodo.anterior = nuevoNodo;
     }
 
@@ -56,9 +58,11 @@ public class ListaDoblementeEnlazada<T> {
             ultimo = nuevoNodo;
             nuevoNodo.anterior = null;
             nuevoNodo.siguiente = null;
+            tamaño++;
         } else {
             insertarAntes(primero, nuevoNodo);
         }
+        
     }
 
     public void insertarFinal(Nodo<T> nuevoNodo) {
@@ -73,6 +77,32 @@ public class ListaDoblementeEnlazada<T> {
         return primero.elemento;
     }
 
+    public int obtenerTamaño() {
+        return tamaño;
+    }
+    
+    public boolean iguales(ListaDoblementeEnlazada<T> lista) {
+        boolean res = false;
+        int aux = 0;
+        if (lista.obtenerTamaño() == this.obtenerTamaño()) {
+            if(lista.obtenerTamaño() > 0) {
+                Nodo<T> nodoAux = lista.primero;
+                Nodo<T> nodoAux2 = this.primero;
+                while(nodoAux != null && (nodoAux.elemento == nodoAux2.elemento)) {
+                    aux++;
+                    nodoAux = nodoAux.siguiente;
+                    nodoAux2 = nodoAux2.siguiente;
+                }
+                if (aux == lista.obtenerTamaño()) {
+                    res = true;
+                }
+            } else {
+                res = true;
+            }
+        }
+        return res;
+    }
+    
     public T ultimo() {
         return ultimo.elemento;
     }
