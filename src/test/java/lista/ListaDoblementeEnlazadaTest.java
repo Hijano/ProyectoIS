@@ -215,15 +215,15 @@ public class ListaDoblementeEnlazadaTest {
 	}
 	
 	@Test
-	public void siSeInsertaAlFinalDeUnaListaNoVaciaEsElPrimeroDeLaListaYSeInsertaBien(){
+	public void siSeInsertaAlFinalDeUnaListaNoVaciaEsElUltimoDeLaListaYSeInsertaBien(){
 		Nodo<Integer> nodo = new Nodo<Integer>(3,null,null);
 		Nodo<Integer> nodoPrimero = new Nodo<Integer>(4,null,null);
 		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
 		lista.insertarPrincipio(nodoPrimero);
 		lista.insertarFinal(nodo);
 		assertEquals(lista.ultimo(),nodo.elemento);
-		assertSame(nodoPrimero.anterior,nodo);
-		assertSame(nodo.siguiente,nodoPrimero);
+		assertSame(nodoPrimero.siguiente,nodo);
+		assertSame(nodo.anterior,nodoPrimero);
 	}
 	@Test(expected= Exception.class)
 	public void siSeInsertaUnNodoNuloAlFinalDeUnaListaSeLanzaUnaExcepcion(){
