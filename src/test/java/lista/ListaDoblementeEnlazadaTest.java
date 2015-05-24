@@ -177,8 +177,8 @@ public class ListaDoblementeEnlazadaTest {
 		lista.insertarPrincipio(nodoPrimero);
 		lista.insertarPrincipio(nodo);
 		assertEquals(lista.primero(),nodo.elemento);
-		assertTrue(nodoPrimero.anterior==nodo);
-		assertTrue(nodo.siguiente==nodoPrimero);
+		assertSame(nodoPrimero.anterior,nodo);
+		assertSame(nodo.siguiente,nodoPrimero);
 	}
 	@Test(expected= Exception.class)
 	public void siSeInsertaUnNodoNuloAlPrincipioDeUnaListaSeLanzaUnaExcepcion(){
