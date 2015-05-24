@@ -2,9 +2,10 @@ package lista;
 
 public class ListaDoblementeEnlazada<T> {
     public static class Nodo<E> {
-        private E elemento;
-        private Nodo<E> siguiente;
-        private Nodo<E> anterior;
+
+        public E elemento;
+        public Nodo<E> siguiente;
+        public Nodo<E> anterior;
 
         public Nodo(E elem, Nodo<E> sig, Nodo<E> prev) {
             elemento = elem;
