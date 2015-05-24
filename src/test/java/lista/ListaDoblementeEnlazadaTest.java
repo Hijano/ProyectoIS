@@ -86,14 +86,7 @@ public class ListaDoblementeEnlazadaTest {
 		assertSame(nodoNuevo.anterior,nodo);
 		assertSame(nodo.siguiente,nodoNuevo);
 	}
-	@Test(expected=Exception.class)
-	public void siSeInsertaUnNodoConElementoNuloAntesDeOtroNodoSeLanzaUnaExcepcion(){
-		Nodo<Integer> nodoNuevo = new Nodo<Integer>(null,null,null);
-		Nodo<Integer> nodo = new Nodo<Integer>(3,null,null);
-		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
-		lista.insertarPrincipio(nodo);
-		lista.insertarAntes(nodo,nodoNuevo);
-	}
+
 	//InsertarAntes
 	//
 	//
@@ -142,15 +135,7 @@ public class ListaDoblementeEnlazadaTest {
 		assertSame(nodo.anterior,nodoNuevo);
 	}
 	
-	@Test(expected=Exception.class)
-	public void siSeInsertaUnNodoConElementoNuloDespuesDeOtroNodoSeLanzaUnaExcepcion(){
-		Nodo<Integer> nodoNuevo = new Nodo<Integer>(null,null,null);
-		Nodo<Integer> nodo = new Nodo<Integer>(3,null,null);
-		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
-		lista.insertarPrincipio(nodo);
-		lista.insertarDespues(nodo,nodoNuevo);
-	}
-	
+
 	
 	//insertarPrincipio
 	//
@@ -188,15 +173,7 @@ public class ListaDoblementeEnlazadaTest {
 		lista.insertarPrincipio(nodoPrimero);
 		lista.insertarPrincipio(nodo);
 	}
-	
-	@Test(expected= Exception.class)
-	public void siSeInsertaUnNodoConElementoNuloAlPrincipioDeUnaListaSeLanzaUnaExcepcion(){
-		Nodo<Integer> nodo = new Nodo<Integer>(null,null,null);
-		Nodo<Integer> nodoPrimero = new Nodo<Integer>(4,null,null);
-		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
-		lista.insertarPrincipio(nodoPrimero);
-		lista.insertarPrincipio(nodo);
-	}
+
 	//insertarFinal
 	//
 	//
@@ -234,14 +211,6 @@ public class ListaDoblementeEnlazadaTest {
 		lista.insertarFinal(nodo);
 	}
 	
-	@Test(expected= Exception.class)
-	public void siSeInsertaUnNodoConElementoNuloAlFinalDeUnaListaSeLanzaUnaExcepcion(){
-		Nodo<Integer> nodo = new Nodo<Integer>(null,null,null);
-		Nodo<Integer> nodoPrimero = new Nodo<Integer>(4,null,null);
-		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
-		lista.insertarPrincipio(nodoPrimero);
-		lista.insertarFinal(nodo);
-	}
 	//primero
 	//
 	//
@@ -372,20 +341,22 @@ public class ListaDoblementeEnlazadaTest {
 		assertSame(nodoSiguiente.anterior,nodoAnterior);
 	}
 	
-	@Test
+	/*@Test
 	public void siSeBorraUnElementoQueNoEstaLaListaQuedaIgual(){
 		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
+		ListaDoblementeEnlazada<Integer> listaAntes = new ListaDoblementeEnlazada<Integer>();
 		Nodo<Integer> nodo = new Nodo<Integer>(3,null,null);
 		lista.insertarFinal(nodo);
+		listaAntes.insertarFinal(nodo);
 		for (int i = 5; i<12;i++) {
 			lista.insertarAntes(nodo, new Nodo<Integer>(i,null,null));
 			lista.insertarDespues(nodo, new Nodo<Integer>(-i,null,null));
+			listaAntes.insertarAntes(nodo, new Nodo<Integer>(i,null,null));
+			listaAntes.insertarDespues(nodo, new Nodo<Integer>(-i,null,null));
 		}
-		String listaAntes = lista.toString();
 		lista.eliminar(new Nodo<Integer>(null,null,null));
-		String listaDespues = lista.toString();
-		assertEquals(listaAntes,listaDespues);
-	}
+		assertEquals(listaAntes,lista);
+	}*/
 	@Test
 	public void siSeBorraUnNodoNuloLaListaQuedaIgual(){
 		ListaDoblementeEnlazada<Integer> lista = new ListaDoblementeEnlazada<Integer>();
@@ -435,5 +406,72 @@ public class ListaDoblementeEnlazadaTest {
 		ListaDoblementeEnlazada<Integer> lista = null;
 		String cad = "Lista: ()";
 		assertEquals(cad,lista.toString());
+	}
+	
+	@Test
+	public void unaListaVaciaEsIgualAOtraListaVacia(){
+		ListaDoblementeEnlazada<Integer> lista1 = new ListaDoblementeEnlazada<Integer>();
+		ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<Integer>();
+		assertEquals(lista1,lista2);
+	} 
+	@Test
+	public void unaListaVaciaNoEsIgualAOtraListaNoVacia(){
+
+		ListaDoblementeEnlazada<Integer> lista1 = new ListaDoblementeEnlazada<Integer>();
+		ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<Integer>();
+		lista2.insertarPrincipio(new Nodo<Integer>(3,null,null));
+		assertNotEquals(lista1,lista2);
+	}
+	@Test
+	public void unaListaEsIgualAOtraSiTienenLosMismosElementosYEnElMismoOrden(){
+		ListaDoblementeEnlazada<Integer> lista1 = new ListaDoblementeEnlazada<Integer>();
+		ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<Integer>();
+		lista1.insertarPrincipio(new Nodo<Integer>(3,null,null));
+		lista2.insertarPrincipio(new Nodo<Integer>(3,null,null));
+		assertEquals(lista1,lista2);
+	}
+	
+	@Test
+	public void unaListaNoEsIgualAOtraSiFaltaAlgúnElemento(){
+		ListaDoblementeEnlazada<Integer> lista1 = new ListaDoblementeEnlazada<Integer>();
+		ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<Integer>();
+		for(int i = 0; i< 5;i++){
+			lista1.insertarPrincipio(new Nodo<Integer>(3,null,null));
+		}
+		for(int i = 0; i<4; i++){
+			lista2.insertarPrincipio(new Nodo<Integer>(3,null,null));
+		}
+		assertNotEquals(lista1,lista2);
+	}
+	
+	@Test
+	public void unaListaNoEsIgualAOtraSiLosElementosNoEstanEnElMismoOrden(){
+		ListaDoblementeEnlazada<Integer> lista1 = new ListaDoblementeEnlazada<Integer>();
+		ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<Integer>();
+		for(int i = 0; i< 5;i++){
+			lista1.insertarPrincipio(new Nodo<Integer>(i,null,null));
+		}
+		for(int i = 0; i<5; i++){
+			lista2.insertarFinal(new Nodo<Integer>(i,null,null));
+		}
+		assertNotEquals(lista1,lista2);
+	}
+	@Test
+	public void unaListaNoEsIgualAUnEntero(){
+		ListaDoblementeEnlazada<Integer> lista1 = new ListaDoblementeEnlazada<Integer>();
+		Integer lista2 = 2;
+		assertNotEquals(lista1,lista2);
+	}
+	
+	@Test
+	public void elConstructorVacioDeExcepcionesDevuelveUnaInstanciaDeLaClase(){
+		ListaDoblementeEnlazadaException l = new ListaDoblementeEnlazadaException();
+		assertTrue(l instanceof ListaDoblementeEnlazadaException);
+	}
+	
+	@Test
+	public void elConstructorDeExcepcionesDevuelveUnaInstanciaDeLaClase(){
+		ListaDoblementeEnlazadaException l = new ListaDoblementeEnlazadaException("mensaje");
+		assertTrue(l instanceof ListaDoblementeEnlazadaException);
 	}
 }
